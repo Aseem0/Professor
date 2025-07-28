@@ -1,4 +1,3 @@
-import { Container, Paper } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 
@@ -39,6 +38,50 @@ function RegistrationForm() {
   return (
     <>
       <h1>Register Form</h1>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="max-w-sm rounded-xl shadow-md overflow-hidden p-8">
+          <h1 className="text-xl font-semibold font-sans flex justify-center items-center">
+            Create an account
+          </h1>
+          <h2 className="text-gray-500 mt-1">
+            Please enter your details to create account
+          </h2>
+          <form>
+            <div>
+              <label className="flex flex-col">
+                <span className="py-1 mt-8 mb-1">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  className="text-sm border border-gray-400 rounded-lg px-2 py-2"
+                  placeholder="Enter your name"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="flex flex-col">
+                <span className="py-1 mt-8 mb-1">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  className="text-sm border border-gray-400 rounded-lg px-2 py-2"
+                  placeholder="Enter your name"
+                />
+              </label>
+            </div>
+          </form>
+          {/* <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            Card Title
+          </h2>
+          <p className="text-gray-600 mb-4">
+            This is a description inside the card. You can add more details
+            here.
+          </p>
+          <button className="bg-black text-white px-4 py-2 rounded-lg hover:opacity-80">
+            Action
+          </button> */}
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div>
