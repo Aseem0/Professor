@@ -1,4 +1,5 @@
 const User = require("../model/userModel");
+var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 async function getUserController(req, res) {
@@ -25,8 +26,16 @@ async function loginHandleController(req, res) {
 
   const checkPassword = await bcrypt.compare(password, existingUser.password);
   if (checkPassword) {
+    const token = jwt.sign(
+      { id: existingUser._id, role: existingUser.role },
+      process.env.AUTH_SECRET_KEY,
+      {
+        expiresIn: "1hr",
+      }
+    );
     res.status(200).json({
       message: "Login Successfully",
+      accessToken: token,
     });
   } else {
     res.status(400).json({
