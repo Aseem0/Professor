@@ -1,4 +1,10 @@
+import AuthHomePage from "../components/HomePage.tsx/AuthHomePage";
+
 function HomePage() {
-  return <div>Home Page</div>;
+  return (
+    <div className="text-white">
+      <AuthHomePage />
+    </div>
+  );
 }
 export default HomePage;

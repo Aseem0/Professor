@@ -3,15 +3,15 @@ function MyInformation({
   name,
   email,
 }: {
-  id: number;
+  id: string;
   name: string;
   email?: string;
 }) {
   return (
-    <div>
-      <h1>{name} Information</h1>
+    <div className="p-2">
+      <h1>{name} </h1>
       <p>Id: {id}</p>
-      <p style={{ backgroundColor: "red" }}>Name: {name}</p>
+      <p>Name: {name}</p>
       {email ? <p>Email: {email}</p> : "No email found"}
     </div>
   );

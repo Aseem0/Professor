@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -13,11 +13,12 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    select: false,
   },
   role: {
     type: String,
-    enum: ["student", "admin"],
-    default: "student",
+    enum: ["admin", "professional"],
+    default: "professional",
   },
 });
 
