@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext, type IAuthContext } from "../App";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isAuth, setAuthState } = useContext<IAuthContext>(AuthContext);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -25,7 +27,15 @@ function Login() {
       .then((response) => {
         const accessToken = response.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
-        alert("Login Succesfully");
+        setAuthState((prev) => ({
+          ...prev,
+          isAuth: true,
+        }));
+      })
+      .catch((error) => {
+        console.log("error => ", error);
+        const errors = error?.response?.data?.message || "An error occurred";
+        alert(errors);
       });
   };
 
