@@ -5,6 +5,7 @@ import {
   useForm,
   useFormContext,
 } from "react-hook-form";
+
 interface QuestionSetForm {
   title: string;
   questions: {
@@ -18,22 +19,23 @@ const CreateQuestionSetForm = () => {
   const defaultValues: QuestionSetForm = {
     title: "",
     questions: [
-      //   {
-      //     choices: [],
-      //     correctAnswer: "",
-      //   },
+      {
+        questionText: "",
+        correctAnswer: "",
+        choices: [],
+      },
     ],
   };
+
   const methods = useForm({ defaultValues });
   const { watch, register } = methods;
   console.log("Form values: ", watch());
-
   return (
     <div>
       <FormProvider {...methods}>
         <form>
           <div>
-            <label className="text-white">EnterTitle: </label>
+            <label className="text-white">Enter Title: </label>
             <input
               className="w-sm text-sm text-white border border-gray-400 rounded-lg px-2 py-2"
               {...register("title")}
@@ -109,13 +111,12 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
     append({
       label: "",
       text: "",
-      //   correctAnswer: [],
     });
   };
   return (
     <div>
       {fields?.map((field, index) => {
-        const removeQuestionHandler = () => {
+        const removeChoiceHandler = () => {
           remove(index);
         };
         return (
@@ -125,10 +126,10 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
                 {...register(
                   `questions.${questionIndex}.choices.${index}.text`
                 )}
-                placeholder="Enter Choices"
+                placeholder="Enter Choice"
               />
-              <button type="button" onClick={removeQuestionHandler}>
-                Remove Choices
+              <button type="button" onClick={removeChoiceHandler}>
+                Remove Choice
               </button>
             </div>
           </div>
