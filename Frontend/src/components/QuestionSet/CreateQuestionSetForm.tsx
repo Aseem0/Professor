@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import {
   FormProvider,
@@ -10,8 +11,8 @@ interface QuestionSetForm {
   title: string;
   questions: {
     questionText: string;
-    correctAnswer: string;
-    choices: { text: string; label: string }[];
+
+    choices: { text: string; label: string; correctAnswer: boolean }[];
   }[];
 }
 
@@ -21,19 +22,34 @@ const CreateQuestionSetForm = () => {
     questions: [
       {
         questionText: "",
-        correctAnswer: "",
         choices: [],
       },
     ],
   };
 
+  const onSubmitHandler = (data: QuestionSetForm) => {
+    const accessToken = localStorage.getItem("accessToken");
+    axios
+      .post("http://localhost:3000/api/admin/questionset/create", data, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        alert("Question Set Created Successfully");
+      })
+      .catch((err) => {
+        alert("Error");
+      });
+  };
+
   const methods = useForm({ defaultValues });
-  const { watch, register } = methods;
+  const { watch, register, handleSubmit } = methods;
   console.log("Form values: ", watch());
   return (
-    <div>
+    <div className="flex justify-center items-center mt-10 ">
       <FormProvider {...methods}>
-        <form>
+        <form onSubmit={handleSubmit(onSubmitHandler)}>
           <div>
             <label className="text-white">Enter Title: </label>
             <input
@@ -43,6 +59,7 @@ const CreateQuestionSetForm = () => {
             />
           </div>
           <CreateQuestion />
+          <button type="submit">Create QuestionSet</button>
         </form>
       </FormProvider>
     </div>
@@ -60,7 +77,7 @@ function CreateQuestion() {
   const AddQuestionHandler = () => {
     append({
       questionText: "",
-      correctAnswer: "",
+
       choices: [],
     });
   };
@@ -74,12 +91,17 @@ function CreateQuestion() {
         };
         return (
           <div className="text-white" key={index}>
-            <div>
+            <div className="gap-20">
               <input
                 {...register(`questions.${index}.questionText`)}
                 placeholder="Enter Questions"
               />
-              <button type="button" onClick={removeQuestionHandler}>
+              <button
+                type="button"
+                onClick={removeQuestionHandler}
+                className="w-25
+               font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 mt-6 rounded-lg hover:opcity-80 cursor-pointer "
+              >
                 Remove
               </button>
             </div>
@@ -109,8 +131,9 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
 
   const AddChoicesHandler = () => {
     append({
-      label: "",
+      label: fields?.length.toString(),
       text: "",
+      correctAnswer: false,
     });
   };
   return (
@@ -119,9 +142,18 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
         const removeChoiceHandler = () => {
           remove(index);
         };
+
         return (
           <div className="text-white" key={index}>
             <div>
+              <input
+                type="checkbox"
+                {...register(
+                  `questions.${questionIndex}.choices.${index}.correctAnswer`
+                )}
+                placeholder="Enter Choice"
+              />
+              ;
               <input
                 {...register(
                   `questions.${questionIndex}.choices.${index}.text`

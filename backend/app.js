@@ -5,6 +5,7 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/userRoutes");
+var adminRouter = require("./routes/adminRoutes");
 var cors = require("cors");
 
 var app = express();
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/userRoutes", usersRouter);
-
+app.use("/api/adminRoutes", adminRouter);
 main().catch((err) => console.log(err));
 
 async function main() {

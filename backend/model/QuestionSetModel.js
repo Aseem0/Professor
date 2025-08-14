@@ -1,6 +1,6 @@
 const { mongoose } = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const questionSetSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -22,8 +22,8 @@ const userSchema = new mongoose.Schema({
             required: true,
           },
           correctAnswer: {
-            type: String,
-            required: true,
+            type: Boolean,
+            default: false,
           },
         },
       ],
@@ -36,5 +36,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const QuestionSet = mongoose.model("QuestionSet", QuestionSetSchema);
+const QuestionSet = mongoose.model("QuestionSet", questionSetSchema);
 module.exports = QuestionSet;
