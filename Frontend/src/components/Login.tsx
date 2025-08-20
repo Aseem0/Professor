@@ -6,7 +6,7 @@ import { AuthContext, type IAuthContext } from "../App";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuth, setAuthState } = useContext<IAuthContext>(AuthContext);
+  // const { isAuth, setAuthState } = useContext<IAuthContext>(AuthContext);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -27,10 +27,7 @@ function Login() {
       .then((response) => {
         const accessToken = response.data.accessToken;
         localStorage.setItem("accessToken", accessToken);
-        setAuthState((prev) => ({
-          ...prev,
-          isAuth: true,
-        }));
+        window.location.href = "/";
       })
       .catch((error) => {
         console.log("error => ", error);

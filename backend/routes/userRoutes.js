@@ -5,6 +5,9 @@ const {
   createUserController,
   loginHandleController,
   getUserListController,
+  updateProfileController,
+  viewMyProfileController,
+  viewProfileofUserController,
 } = require("../controller/userController");
 const { validateTokenMiddleware } = require("../middleware/AuthMiddleware");
 var router = express.Router();
@@ -19,4 +22,11 @@ router.post("/create", createUserController);
 router.post("/login", loginHandleController);
 router.get("/list", validateTokenMiddleware, getUserListController);
 
+router.put("/profile", validateTokenMiddleware, updateProfileController);
+router.get("/profile/me", validateTokenMiddleware, viewMyProfileController);
+router.get(
+  "/profile/:id",
+  validateTokenMiddleware,
+  viewProfileofUserController
+);
 module.exports = router;

@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 import {
   FormProvider,
   useFieldArray,
@@ -27,6 +26,10 @@ const CreateQuestionSetForm = () => {
     ],
   };
 
+  const methods = useForm({ defaultValues });
+  const { watch, register, handleSubmit } = methods;
+  console.log("form values => ", watch());
+
   const onSubmitHandler = (data: QuestionSetForm) => {
     const accessToken = localStorage.getItem("accessToken");
     axios
@@ -43,9 +46,6 @@ const CreateQuestionSetForm = () => {
       });
   };
 
-  const methods = useForm({ defaultValues });
-  const { watch, register, handleSubmit } = methods;
-  console.log("Form values: ", watch());
   return (
     <div className="flex justify-center items-center mt-10 ">
       <FormProvider {...methods}>
@@ -59,7 +59,13 @@ const CreateQuestionSetForm = () => {
             />
           </div>
           <CreateQuestion />
-          <button type="submit">Create QuestionSet</button>
+          <button
+            className="w-25
+               font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 mt-6 rounded-lg hover:opcity-80 cursor-pointer "
+            type="submit"
+          >
+            Create QuestionSet
+          </button>
         </form>
       </FormProvider>
     </div>
@@ -76,9 +82,8 @@ function CreateQuestion() {
 
   const AddQuestionHandler = () => {
     append({
-      questionText: "",
-
       choices: [],
+      questionText: "",
     });
   };
 
@@ -136,6 +141,7 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
       correctAnswer: false,
     });
   };
+
   return (
     <div>
       {fields?.map((field, index) => {
@@ -153,7 +159,7 @@ function CreateChoices({ questionIndex }: { questionIndex: number }) {
                 )}
                 placeholder="Enter Choice"
               />
-              ;
+
               <input
                 {...register(
                   `questions.${questionIndex}.choices.${index}.text`

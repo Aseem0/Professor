@@ -7,10 +7,7 @@ function NavBar() {
 
   const logoutHandler = () => {
     localStorage.removeItem("accessToken");
-    setAuthState((prev) => ({
-      ...prev,
-      isAuth: false,
-    }));
+    window.location.reload();
   };
 
   return (
@@ -35,6 +32,12 @@ function NavBar() {
               to="/profile"
             >
               Profile
+            </NavLink>
+            <NavLink
+              className="bg-gradient-to-r from-white to-white bg-clip-text text-transparent hover:from-purple-500 hover:to-pink-500 transition-all duration-500"
+              to="/questionset/list"
+            >
+              QuestionSet
             </NavLink>
             <button
               className="w-sm font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 mt-6 rounded-lg hover:opcity-80 cursor-pointer "

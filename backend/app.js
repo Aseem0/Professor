@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/userRoutes");
 var adminRouter = require("./routes/adminRoutes");
+var questionRouter = require("./routes/questionRoutes");
 var cors = require("cors");
 
 var app = express();
@@ -19,7 +20,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/userRoutes", usersRouter);
-app.use("/api/adminRoutes", adminRouter);
+app.use("/api/admin", adminRouter);
+app.use("/api/questions", questionRouter);
 main().catch((err) => console.log(err));
 
 async function main() {
