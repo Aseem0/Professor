@@ -60,7 +60,7 @@ const CreateQuestionSetForm = () => {
           </div>
           <CreateQuestion />
           <button
-            className="w-25
+            className="w-50
                font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 mt-6 rounded-lg hover:opcity-80 cursor-pointer "
             type="submit"
           >

@@ -31,19 +31,19 @@ function NavBar() {
               className="bg-gradient-to-r from-white to-white bg-clip-text text-transparent hover:from-purple-500 hover:to-pink-500 transition-all duration-500"
               to="/profile"
             >
-              Profile
+              PROFILE
             </NavLink>
             <NavLink
               className="bg-gradient-to-r from-white to-white bg-clip-text text-transparent hover:from-purple-500 hover:to-pink-500 transition-all duration-500"
               to="/questionset/list"
             >
-              QuestionSet
+              QUESTIONSET
             </NavLink>
             <button
-              className="w-sm font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 mt-6 rounded-lg hover:opcity-80 cursor-pointer "
+              className="w-24 font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-black hover:brightness-110 py-2 px-2 rounded-lg hover:opcity-80 cursor-pointer"
               onClick={logoutHandler}
             >
-              Logout
+              LOGOUT
             </button>
           </>
         ) : (

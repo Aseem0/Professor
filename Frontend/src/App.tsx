@@ -11,6 +11,7 @@ import CreateQuestionSetPage from "./pages/QuestionSet/CreateQuestionSetPage";
 import { jwtDecode } from "jwt-decode";
 import ListQuestionSetPage from "./pages/QuestionSet/ListQuestionSetPage";
 import AttemptQuizPage from "./pages/QuestionSet/AttemptQuizPage";
+import ProfilePage from "./pages/ProfilePage";
 
 export interface IAuthState {
   isAuth: boolean;
@@ -23,7 +24,7 @@ export interface IAuthContext extends IAuthState {
 
 export interface JwtDecode {
   id: string;
-  role: "admin" | "professional";
+  role: "admin" | "professional" | "guest";
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -83,11 +84,11 @@ function App() {
         >
           <NavBar />
           <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutUsPage />} />
             {/* unauth */}
             {authState?.role === "guest" && (
               <>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/about" element={<AboutUsPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
               </>
@@ -95,6 +96,7 @@ function App() {
             {/* auth */}
             {authState?.isAuth && (
               <>
+                <Route path="/profile" element={<ProfilePage />} />
                 <Route
                   path="/questionset/list"
                   element={<ListQuestionSetPage />}

@@ -23,13 +23,14 @@ const AuthHomePage = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         })
-        .then((res) => {
-          const userList: IAuthUserList[] = res.data.users;
+        .then((response) => {
+          const userList: IAuthUserList[] = response?.data?.users || [];
           setUsers(userList);
         })
         .catch((error) => {
-          // const errors = error?.response?.data?.message || "An error occurred";
-          // alert(errors);
+          console.log("error => ", error);
+          const errors = error?.response?.data?.message || "An error occurred";
+          alert(errors);
         });
     }
     fetchData();

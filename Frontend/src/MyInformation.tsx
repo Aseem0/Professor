@@ -8,11 +8,10 @@ function MyInformation({
   email?: string;
 }) {
   return (
-    <div className="p-2">
-      <h1>{name} </h1>
-      <p>Id: {id}</p>
-      <p>Name: {name}</p>
-      {email ? <p>Email: {email}</p> : "No email found"}
+    <div className="my-info">
+      <p>Id : {id}</p>
+      <p>Name : {name}</p>
+      {email ? <p>Email : {email}</p> : <p>No Email Found</p>}
     </div>
   );
 }
